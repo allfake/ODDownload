@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
 
-public class ODDownload : MonoBehaviour {
+public class ODDownload : ODSingletonMono<ODDownload> {
 
 	public delegate void DownloadBytes(ulong downloadBytes); // declare delegate type
 	public delegate void DownloadCompleted(); // declare delegate type

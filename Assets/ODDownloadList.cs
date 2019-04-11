@@ -2,20 +2,20 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Unity.Collections;
-public class ODDownloadList : MonoBehaviour 
+public class ODDownloadList : ODSingletonMono<ODDownloadList>
 {
 	public delegate void DownloadFinish(long statusCode, string error = null); // declare delegate type
 	public delegate void Downloading(); // declare delegate type
 	public DownloadFinish downloadFinish;
 	public Downloading downloading;
-	public ODDownload downloader;
+	private ODDownload downloader;
 	public List<string> downloadList;
 	public float progress;
 	public float totalBytesDownload;
 	public bool isDone = false;
-	void Start()
+	void Awake()
 	{
-		// Download();
+		downloader = ODDownload.Instance;
 	}
 
 	public void Download()

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
-public class ODApiRequest : MonoBehaviour 
+public class ODApiRequest : ODSingletonMono<ODApiRequest>
 {
 	[System.Serializable]
 	public class APIOD
@@ -20,12 +20,19 @@ public class ODApiRequest : MonoBehaviour
 	}
 
 	public string APIUrl = "";
-	public ODDownload downloader;
-	public ODDownloadList downloaderList;
+	private ODDownload downloader;
+	private ODDownloadList downloaderList;
 	public float totalFilesize = 0;
 	private List<string> contentList = new List<string>();
 	private APIOD apiData;
-	void Start () {
+
+	private void Awake()
+	{
+		downloader = ODDownload.Instance;
+		downloaderList = ODDownloadList.Instance;
+	}
+	void Start () 
+	{
 		StartCoroutine(DownloadApi());
 	}
 
